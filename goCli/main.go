@@ -27,4 +27,14 @@ func main() {
 
 	fmt.Printf("Ticket: %v, booked by %v, confirmation sent at %v\n", ticketNumToBook, name, email)
 
+	// size is fix here, use slices for this
+	// slices uses array, just like vectors in C++
+	// var bookings [50]string;
+	// bookings[0] = "amoeba"
+	// bookings[10] = "aceton"
+
+	var bookings []string;
+	bookings = append(bookings, "amoeba");
+	fmt.Println(bookings)
+
 }
