@@ -27,14 +27,14 @@ const (
 	c5 string = "cruel world"
 );
 
+func printVars() {
 
-func main() {
 	t, y := 88, "Cruel World";
 	fmt.Println(a, b);
 	fmt.Println(x, z);
 	fmt.Println(t, y, h, j);
 	fmt.Println(c1, c5, c3);
-
+	
 	// print functions
 	/*
 	
@@ -51,6 +51,49 @@ func main() {
 		*/
 	fmt.Printf("c5 value: %v and type %T \n", c5, t);
 	// %v for value, %T for type
+}
 
+
+func loops() {
+	/*
+	go has only for loop and no bracktes are required for loops
+	*/
+
+	for i := 0; i<10; i++ {
+		fmt.Println("hell", i);
+	}
+
+
+	/*
+	range, go uses range for iterating over slices or maps
+	*/
+	var arr = []int {1, 3, 4, 5, 6};
+	for index, value := range arr {
+		fmt.Println(index, value)
+	}
+}
+
+
+func ifElse() {
+	/*
+	we can define variable itself in if statements
+		but it will be available only in subsequent if else statements
+		not after else statements 
+	*/
+
+	// var x int = 10;
+	if x1:= 100; x1 >= 10 {
+		fmt.Println("gt 10");
+	} else {
+		fmt.Println("n gt 10");
+	}
+
+	// fmt.Println(x1) --> will raise error
+}
+
+func main() {
+	// printVars()
+	// loops()
+	ifElse()
 }
 
