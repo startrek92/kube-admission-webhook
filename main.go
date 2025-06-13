@@ -8,6 +8,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/startrek92/kube-admission-webhook/controllers"
+	"github.com/startrek92/kube-admission-webhook/db"
 	"github.com/startrek92/kube-admission-webhook/initializers"
 )
 
@@ -42,12 +43,13 @@ func main() {
 	serverAddr := "192.168.1.10:5555"
 
 	router := gin.Default()
-	router.Use(LogRequestBodyMiddleware())
+	// router.Use(LogRequestBodyMiddleware())
 	router.GET("", func(c *gin.Context) {
 		c.JSON(200, gin.H{
 			"message": "pong",
 		})
 	})
 	router.POST("/update", controllers.RequestSchema)
+	db.Connect("mongoDbConnectionString");
 	router.RunTLS(serverAddr, certFile, keyFile)
 }
