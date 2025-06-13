@@ -50,6 +50,6 @@ func main() {
 		})
 	})
 	router.POST("/update", controllers.RequestSchema)
-	db.Connect("mongoDbConnectionString");
+	db.Connect("mongodb+srv://smartpixel99:hello%40123@cluster0.01frdhe.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 	router.RunTLS(serverAddr, certFile, keyFile)
 }
