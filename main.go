@@ -1,55 +1,43 @@
 package main
 
 import (
-	"bytes"
-	"io"
-	"log"
+	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/startrek92/kube-admission-webhook/config"
 	"github.com/startrek92/kube-admission-webhook/controllers"
 	"github.com/startrek92/kube-admission-webhook/db"
-	"github.com/startrek92/kube-admission-webhook/initializers"
+	"github.com/startrek92/kube-admission-webhook/logger"
 )
 
-func init() {
-	initializers.LoadEnvVariables()
-}
-
-func LogRequestBodyMiddleware() gin.HandlerFunc {
-	return func(c *gin.Context) {
-		// Read the request body
-		bodyBytes, err := io.ReadAll(c.Request.Body)
-		if err != nil {
-			log.Println("Error reading request body:", err)
-			c.AbortWithStatus(http.StatusInternalServerError)
-			return
-		}
-
-		// Log the request body
-		log.Println("Request Body:", string(bodyBytes))
-
-		// Restore the request body (since it's read once)
-		c.Request.Body = io.NopCloser(bytes.NewBuffer(bodyBytes))
-
-		// Continue to the next handler
-		c.Next()
-	}
-}
-
 func main() {
-	certFile := "./certs/webhook-tls.crt"
-	keyFile := "./certs/webhook-tls.key"
-	serverAddr := "192.168.1.10:5555"
+	config.InitConfig("./config/config.toml")
+	cfg := config.GetConfig()
 
+	// Initialize structured logger
+	logger.InitLogger(cfg)
+	logger.Log.Info("Server starting...")
+
+	serverAddr := fmt.Sprintf("%s:%d", cfg.Server.Host, cfg.Server.Port)
+
+	gin.SetMode(gin.ReleaseMode)
 	router := gin.Default()
-	// router.Use(LogRequestBodyMiddleware())
+	router.Use(logger.GinLogrusMiddleware())
+
 	router.GET("", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "pong",
-		})
+		logger.Log.Info("Health check route hit")
+		c.JSON(http.StatusOK, gin.H{"message": "pong"})
 	})
-	router.POST("/update", controllers.RequestSchema)
-	db.Connect("mongodb+srv://smartpixel99:hello%40123@cluster0.01frdhe.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
-	router.RunTLS(serverAddr, certFile, keyFile)
+
+	router.POST("/update", controllers.IncomingRequestSchema)
+
+	logger.Log.Infof("Connecting to MongoDB at %s", cfg.BuildMongoURI())
+	db.Connect(cfg.BuildMongoURI())
+
+	logger.Log.Infof("Running HTTPS server on %s", serverAddr)
+	err := router.RunTLS(serverAddr, cfg.Server.CertFile, cfg.Server.KeyFile)
+	if err != nil {
+		logger.Log.Fatalf("Failed to start HTTPS server: %v", err)
+	}
 }

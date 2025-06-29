@@ -1,0 +1,21 @@
+[server]
+host = "0.0.0.0"
+port = 8080
+env = "dev"
+cert_file = "./certs/webhook-tls.crt"
+key_file = "./certs/webhook-tls.key"
+
+[database]
+username = "smartpixel99"
+password = "hello@123"
+endpoint = "cluster0.01frdhe.mongodb.net"
+params = "retryWrites=true&w=majority&appName=Cluster0"
+db_name = "k8s-workload-env-config"
+
+[logging]
+log_dir = "./logs"
+log_file = "webhook.log"
+log_level = "debug"  # can be "info", "warn", "error", etc.
+
+[workload-collections]
+dunder_mifflin = "dunder-mifflin"

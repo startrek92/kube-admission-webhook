@@ -2,32 +2,39 @@ package db
 
 import (
 	"context"
-	"log"
 	"time"
+
+	"github.com/sirupsen/logrus"
+	"github.com/startrek92/kube-admission-webhook/config"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
-
-var MongoClient *mongo.Client;
+var (
+	MongoClient   *mongo.Client
+	MongoDatabase *mongo.Database
+)
 
 func Connect(dbConnectionString string) {
-	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second);
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 
-	clientOptions := options.Client().ApplyURI(dbConnectionString);
+	logrus.Infof("Connecting to MongoDB at %s", dbConnectionString)
 
-	client, err := mongo.Connect(ctx, clientOptions);
+	clientOptions := options.Client().ApplyURI(dbConnectionString)
 
+	client, err := mongo.Connect(ctx, clientOptions)
 	if err != nil {
-		log.Fatal("db connection failed", err);
+		logrus.Fatalf("DB connection failed: %v", err)
 	}
 
 	if err := client.Ping(ctx, nil); err != nil {
-		log.Fatal("failed to ping db", err);
+		logrus.Fatalf("Failed to ping MongoDB: %v", err)
 	}
 
-	log.Printf("db connection success")
-	MongoClient = client;
-	
+	cfg := config.GetConfig()
+	MongoClient = client
+	MongoDatabase = client.Database(cfg.Database.DBName)
+
+	logrus.Infof("MongoDB connection established to DB: %s", cfg.Database.DBName)
 }

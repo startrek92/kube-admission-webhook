@@ -5,9 +5,12 @@ go 1.23.0
 toolchain go1.24.1
 
 require (
+	github.com/BurntSushi/toml v1.5.0
 	github.com/gin-gonic/gin v1.10.0
 	github.com/joho/godotenv v1.5.1
+	github.com/sirupsen/logrus v1.9.3
 	go.mongodb.org/mongo-driver v1.17.4
+	gopkg.in/natefinch/lumberjack.v2 v2.2.1
 )
 
 require (
