@@ -4,7 +4,8 @@ import (
 	"context"
 	"time"
 
-	"github.com/sirupsen/logrus"
+	log "log/slog"
+
 	"github.com/startrek92/kube-admission-webhook/db"
 	mongomodels "github.com/startrek92/kube-admission-webhook/mongoModels"
 	"go.mongodb.org/mongo-driver/bson"
@@ -22,13 +23,13 @@ func GetWorkloadEnv(collectionName string, workloadID string) (*mongomodels.Work
 
 	if err != nil {
 		if err == mongo.ErrNoDocuments {
-			logrus.Infof("No document found for workload ID: %s in collection: %s", workloadID, collectionName)
-			return nil, nil // nil result is valid, just not found
+			log.Info("No document found for workload", "workload_id", workloadID, "collection", collectionName)
+			return nil, nil
 		}
-		logrus.Errorf("Error fetching workload ID %s from collection %s: %v", workloadID, collectionName, err)
+		log.Error("Error fetching workload from MongoDB", "workload_id", workloadID, "collection", collectionName, "error", err)
 		return nil, err
 	}
 
-	logrus.Infof("Fetched typed workload config for '%s': %+v", workloadID, result)
+	log.Info("Fetched workload config", "workload_id", workloadID, "config", result)
 	return &result, nil
 }

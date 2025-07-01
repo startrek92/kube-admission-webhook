@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"net/http"
 
+	log "log/slog"
+
 	"github.com/gin-gonic/gin"
 	"github.com/startrek92/kube-admission-webhook/config"
 	"github.com/startrek92/kube-admission-webhook/controllers"
@@ -15,29 +17,29 @@ func main() {
 	config.InitConfig("./config/config.toml")
 	cfg := config.GetConfig()
 
-	// Initialize structured logger
-	logger.InitLogger(cfg)
-	logger.Log.Info("Server starting...")
+	if err := logger.InitLogger(cfg); err != nil {
+		panic(fmt.Errorf("failed to init logger: %w", err))
+	}
+	log.Info("Server starting...")
 
 	serverAddr := fmt.Sprintf("%s:%d", cfg.Server.Host, cfg.Server.Port)
 
 	gin.SetMode(gin.ReleaseMode)
-	router := gin.Default()
-	router.Use(logger.GinLogrusMiddleware())
+	router := gin.New()
+	router.Use(logger.GinSlogMiddleware())
 
 	router.GET("", func(c *gin.Context) {
-		logger.Log.Info("Health check route hit")
+		log.Info("Health check route hit")
 		c.JSON(http.StatusOK, gin.H{"message": "pong"})
 	})
 
 	router.POST("/update", controllers.IncomingRequestSchema2)
 
-	logger.Log.Infof("Connecting to MongoDB at %s", cfg.BuildMongoURI())
 	db.Connect(cfg.BuildMongoURI())
 
-	logger.Log.Infof("Running HTTPS server on %s", serverAddr)
+	log.Info("Running HTTPS server", "address", serverAddr)
 	err := router.RunTLS(serverAddr, cfg.Server.CertFile, cfg.Server.KeyFile)
 	if err != nil {
-		logger.Log.Fatalf("Failed to start HTTPS server: %v", err)
+		log.Error("Failed to start HTTPS server", "error", err)
 	}
 }

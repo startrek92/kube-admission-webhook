@@ -1,472 +1,704 @@
 {
-    "kind": "AdmissionReview",
-    "apiVersion": "admission.k8s.io/v1",
-    "request": {
-        "uid": "64125850-87ab-46e6-8d57-d2db2dc031b7",
-        "kind": {
-            "group": "apps",
-            "version": "v1",
-            "kind": "Deployment"
-        },
-        "resource": {
-            "group": "apps",
-            "version": "v1",
-            "resource": "deployments"
-        },
-        "requestKind": {
-            "group": "apps",
-            "version": "v1",
-            "kind": "Deployment"
-        },
-        "requestResource": {
-            "group": "apps",
-            "version": "v1",
-            "resource": "deployments"
-        },
+  "kind": "AdmissionReview",
+  "apiVersion": "admission.k8s.io/v1",
+  "request": {
+    "uid": "64125850-87ab-46e6-8d57-d2db2dc031b7",
+    "kind": {
+      "group": "apps",
+      "version": "v1",
+      "kind": "Deployment"
+    },
+    "resource": {
+      "group": "apps",
+      "version": "v1",
+      "resource": "deployments"
+    },
+    "requestKind": {
+      "group": "apps",
+      "version": "v1",
+      "kind": "Deployment"
+    },
+    "requestResource": {
+      "group": "apps",
+      "version": "v1",
+      "resource": "deployments"
+    },
+    "name": "auth",
+    "namespace": "dunder-mifflin",
+    "operation": "UPDATE",
+    "userInfo": {
+      "username": "system:serviceaccount:kubernetes-dashboard:kubernetes-dashboard",
+      "uid": "517cff38-3d50-4f05-8394-cc8b7d90ade1",
+      "groups": [
+        "system:serviceaccounts",
+        "system:serviceaccounts:kubernetes-dashboard",
+        "system:authenticated"
+      ],
+      "extra": {
+        "authentication.kubernetes.io/credential-id": [
+          "JTI=8fc38c13-d522-4829-ac62-644c1b0a6a74"
+        ],
+        "authentication.kubernetes.io/node-name": [
+          "minikube"
+        ],
+        "authentication.kubernetes.io/node-uid": [
+          "628159e7-af75-4c87-89f5-cbe0f8e6de9c"
+        ],
+        "authentication.kubernetes.io/pod-name": [
+          "kubernetes-dashboard-779776cb65-lvcmn"
+        ],
+        "authentication.kubernetes.io/pod-uid": [
+          "93a62bf2-57f5-4b31-8703-01a0ea93d8ed"
+        ]
+      }
+    },
+    "object": {
+      "kind": "Deployment",
+      "apiVersion": "apps/v1",
+      "metadata": {
         "name": "fastapi-app",
         "namespace": "default",
-        "operation": "UPDATE",
-        "userInfo": {
-            "username": "system:serviceaccount:kubernetes-dashboard:kubernetes-dashboard",
-            "uid": "517cff38-3d50-4f05-8394-cc8b7d90ade1",
-            "groups": [
-                "system:serviceaccounts",
-                "system:serviceaccounts:kubernetes-dashboard",
-                "system:authenticated"
+        "uid": "cbba6a54-7d49-4e48-ac6c-53bf8515acbc",
+        "resourceVersion": "46637",
+        "generation": 8,
+        "creationTimestamp": "2025-03-22T19:47:07Z",
+        "annotations": {
+          "deployment.kubernetes.io/revision": "2"
+        },
+        "managedFields": [
+          {
+            "manager": "kube-controller-manager",
+            "operation": "Update",
+            "apiVersion": "apps/v1",
+            "time": "2025-03-23T14:19:26Z",
+            "fieldsType": "FieldsV1",
+            "fieldsV1": {
+              "f:metadata": {
+                "f:annotations": {
+                  ".": {
+                    
+                  },
+                  "f:deployment.kubernetes.io/revision": {
+                    
+                  }
+                }
+              },
+              "f:status": {
+                "f:conditions": {
+                  ".": {
+                    
+                  },
+                  "k:{\"type\":\"Available\"}": {
+                    ".": {
+                      
+                    },
+                    "f:lastTransitionTime": {
+                      
+                    },
+                    "f:lastUpdateTime": {
+                      
+                    },
+                    "f:message": {
+                      
+                    },
+                    "f:reason": {
+                      
+                    },
+                    "f:status": {
+                      
+                    },
+                    "f:type": {
+                      
+                    }
+                  },
+                  "k:{\"type\":\"Progressing\"}": {
+                    ".": {
+                      
+                    },
+                    "f:lastTransitionTime": {
+                      
+                    },
+                    "f:lastUpdateTime": {
+                      
+                    },
+                    "f:message": {
+                      
+                    },
+                    "f:reason": {
+                      
+                    },
+                    "f:status": {
+                      
+                    },
+                    "f:type": {
+                      
+                    }
+                  }
+                },
+                "f:observedGeneration": {
+                  
+                }
+              }
+            },
+            "subresource": "status"
+          },
+          {
+            "manager": "dashboard",
+            "operation": "Update",
+            "apiVersion": "apps/v1",
+            "time": "2025-03-23T14:20:02Z",
+            "fieldsType": "FieldsV1",
+            "fieldsV1": {
+              "f:spec": {
+                "f:progressDeadlineSeconds": {
+                  
+                },
+                "f:replicas": {
+                  
+                },
+                "f:revisionHistoryLimit": {
+                  
+                },
+                "f:selector": {
+                  
+                },
+                "f:strategy": {
+                  "f:rollingUpdate": {
+                    ".": {
+                      
+                    },
+                    "f:maxSurge": {
+                      
+                    },
+                    "f:maxUnavailable": {
+                      
+                    }
+                  },
+                  "f:type": {
+                    
+                  }
+                },
+                "f:template": {
+                  "f:metadata": {
+                    "f:labels": {
+                      ".": {
+                        
+                      },
+                      "f:app": {
+                        
+                      }
+                    }
+                  },
+                  "f:spec": {
+                    "f:containers": {
+                      "k:{\"name\":\"fastapi-container\"}": {
+                        ".": {
+                          
+                        },
+                        "f:env": {
+                          ".": {
+                            
+                          },
+                          "k:{\"name\":\"SAMPLE_ENV1\"}": {
+                            ".": {
+                              
+                            },
+                            "f:name": {
+                              
+                            },
+                            "f:value": {
+                              
+                            }
+                          },
+                          "k:{\"name\":\"SAMPLE_ENV2\"}": {
+                            ".": {
+                              
+                            },
+                            "f:name": {
+                              
+                            },
+                            "f:value": {
+                              
+                            }
+                          }
+                        },
+                        "f:image": {
+                          
+                        },
+                        "f:imagePullPolicy": {
+                          
+                        },
+                        "f:name": {
+                          
+                        },
+                        "f:ports": {
+                          ".": {
+                            
+                          },
+                          "k:{\"containerPort\":8000,\"protocol\":\"TCP\"}": {
+                            ".": {
+                              
+                            },
+                            "f:containerPort": {
+                              
+                            },
+                            "f:protocol": {
+                              
+                            }
+                          }
+                        },
+                        "f:resources": {
+                          
+                        },
+                        "f:terminationMessagePath": {
+                          
+                        },
+                        "f:terminationMessagePolicy": {
+                          
+                        }
+                      }
+                    },
+                    "f:dnsPolicy": {
+                      
+                    },
+                    "f:restartPolicy": {
+                      
+                    },
+                    "f:schedulerName": {
+                      
+                    },
+                    "f:securityContext": {
+                      
+                    },
+                    "f:terminationGracePeriodSeconds": {
+                      
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      "spec": {
+        "replicas": 1,
+        "selector": {
+          "matchLabels": {
+            "app": "fastapi-app"
+          }
+        },
+        "template": {
+          "metadata": {
+            "creationTimestamp": null,
+            "labels": {
+              "app": "fastapi-app"
+            }
+          },
+          "spec": {
+            "containers": [
+                {
+                "name": "worker",
+                "image": "smartpixel99/worker:01",
+                "ports": [
+                  {
+                    "containerPort": 9000,
+                    "protocol": "TCP"
+                  }
+                ],
+                "env": [
+                  {
+                    "name": "EXISTING_ENV",
+                    "value": "should be replaced"
+                  }
+                ],
+                "resources": {
+                  
+                },
+                "terminationMessagePath": "/dev/termination-log",
+                "terminationMessagePolicy": "File",
+                "imagePullPolicy": "Always"
+              },
+              {
+                "name": "auth",
+                "image": "smartpixel99/auth:01",
+                "ports": [
+                  {
+                    "containerPort": 8000,
+                    "protocol": "TCP"
+                  }
+                ],
+                "env": [
+                  {
+                    "name": "SAMPLE_ENV1",
+                    "value": "Hello from Kubernetes"
+                  },
+                  {
+                    "name": "SAMPLE_ENV2",
+                    "value": "Another Env Variable"
+                  }
+                ],
+                "resources": {
+                  
+                },
+                "terminationMessagePath": "/dev/termination-log",
+                "terminationMessagePolicy": "File",
+                "imagePullPolicy": "Always"
+              }
             ],
-            "extra": {
-                "authentication.kubernetes.io/credential-id": [
-                    "JTI=8fc38c13-d522-4829-ac62-644c1b0a6a74"
-                ],
-                "authentication.kubernetes.io/node-name": [
-                    "minikube"
-                ],
-                "authentication.kubernetes.io/node-uid": [
-                    "628159e7-af75-4c87-89f5-cbe0f8e6de9c"
-                ],
-                "authentication.kubernetes.io/pod-name": [
-                    "kubernetes-dashboard-779776cb65-lvcmn"
-                ],
-                "authentication.kubernetes.io/pod-uid": [
-                    "93a62bf2-57f5-4b31-8703-01a0ea93d8ed"
-                ]
-            }
+            "restartPolicy": "Always",
+            "terminationGracePeriodSeconds": 30,
+            "dnsPolicy": "ClusterFirst",
+            "securityContext": {
+              
+            },
+            "schedulerName": "default-scheduler"
+          }
         },
-        "object": {
-            "kind": "Deployment",
+        "strategy": {
+          "type": "RollingUpdate",
+          "rollingUpdate": {
+            "maxUnavailable": "25%",
+            "maxSurge": "25%"
+          }
+        },
+        "revisionHistoryLimit": 10,
+        "progressDeadlineSeconds": 600
+      },
+      "status": {
+        "observedGeneration": 8,
+        "conditions": [
+          {
+            "type": "Progressing",
+            "status": "True",
+            "lastUpdateTime": "2025-03-22T19:57:36Z",
+            "lastTransitionTime": "2025-03-22T19:47:07Z",
+            "reason": "NewReplicaSetAvailable",
+            "message": "ReplicaSet \"fastapi-app-75f85bc458\" has successfully progressed."
+          },
+          {
+            "type": "Available",
+            "status": "True",
+            "lastUpdateTime": "2025-03-23T14:13:53Z",
+            "lastTransitionTime": "2025-03-23T14:13:53Z",
+            "reason": "MinimumReplicasAvailable",
+            "message": "Deployment has minimum availability."
+          }
+        ]
+      }
+    },
+    "oldObject": {
+      "kind": "Deployment",
+      "apiVersion": "apps/v1",
+      "metadata": {
+        "name": "fastapi-app",
+        "namespace": "default",
+        "uid": "cbba6a54-7d49-4e48-ac6c-53bf8515acbc",
+        "resourceVersion": "46637",
+        "generation": 8,
+        "creationTimestamp": "2025-03-22T19:47:07Z",
+        "annotations": {
+          "deployment.kubernetes.io/revision": "2"
+        },
+        "managedFields": [
+          {
+            "manager": "dashboard",
+            "operation": "Update",
             "apiVersion": "apps/v1",
-            "metadata": {
-                "name": "fastapi-app",
-                "namespace": "default",
-                "uid": "cbba6a54-7d49-4e48-ac6c-53bf8515acbc",
-                "resourceVersion": "46637",
-                "generation": 8,
-                "creationTimestamp": "2025-03-22T19:47:07Z",
-                "annotations": {
-                    "deployment.kubernetes.io/revision": "2"
+            "time": "2025-03-23T13:27:37Z",
+            "fieldsType": "FieldsV1",
+            "fieldsV1": {
+              "f:spec": {
+                "f:progressDeadlineSeconds": {
+                  
                 },
-                "managedFields": [
-                    {
-                        "manager": "kube-controller-manager",
-                        "operation": "Update",
-                        "apiVersion": "apps/v1",
-                        "time": "2025-03-23T14:19:26Z",
-                        "fieldsType": "FieldsV1",
-                        "fieldsV1": {
-                            "f:metadata": {
-                                "f:annotations": {
-                                    ".": {},
-                                    "f:deployment.kubernetes.io/revision": {}
-                                }
-                            },
-                            "f:status": {
-                                "f:conditions": {
-                                    ".": {},
-                                    "k:{\"type\":\"Available\"}": {
-                                        ".": {},
-                                        "f:lastTransitionTime": {},
-                                        "f:lastUpdateTime": {},
-                                        "f:message": {},
-                                        "f:reason": {},
-                                        "f:status": {},
-                                        "f:type": {}
-                                    },
-                                    "k:{\"type\":\"Progressing\"}": {
-                                        ".": {},
-                                        "f:lastTransitionTime": {},
-                                        "f:lastUpdateTime": {},
-                                        "f:message": {},
-                                        "f:reason": {},
-                                        "f:status": {},
-                                        "f:type": {}
-                                    }
-                                },
-                                "f:observedGeneration": {}
-                            }
+                "f:revisionHistoryLimit": {
+                  
+                },
+                "f:selector": {
+                  
+                },
+                "f:strategy": {
+                  "f:rollingUpdate": {
+                    ".": {
+                      
+                    },
+                    "f:maxSurge": {
+                      
+                    },
+                    "f:maxUnavailable": {
+                      
+                    }
+                  },
+                  "f:type": {
+                    
+                  }
+                },
+                "f:template": {
+                  "f:metadata": {
+                    "f:labels": {
+                      ".": {
+                        
+                      },
+                      "f:app": {
+                        
+                      }
+                    }
+                  },
+                  "f:spec": {
+                    "f:containers": {
+                      "k:{\"name\":\"fastapi-container\"}": {
+                        ".": {
+                          
                         },
-                        "subresource": "status"
-                    },
-                    {
-                        "manager": "dashboard",
-                        "operation": "Update",
-                        "apiVersion": "apps/v1",
-                        "time": "2025-03-23T14:20:02Z",
-                        "fieldsType": "FieldsV1",
-                        "fieldsV1": {
-                            "f:spec": {
-                                "f:progressDeadlineSeconds": {},
-                                "f:replicas": {},
-                                "f:revisionHistoryLimit": {},
-                                "f:selector": {},
-                                "f:strategy": {
-                                    "f:rollingUpdate": {
-                                        ".": {},
-                                        "f:maxSurge": {},
-                                        "f:maxUnavailable": {}
-                                    },
-                                    "f:type": {}
-                                },
-                                "f:template": {
-                                    "f:metadata": {
-                                        "f:labels": {
-                                            ".": {},
-                                            "f:app": {}
-                                        }
-                                    },
-                                    "f:spec": {
-                                        "f:containers": {
-                                            "k:{\"name\":\"fastapi-container\"}": {
-                                                ".": {},
-                                                "f:env": {
-                                                    ".": {},
-                                                    "k:{\"name\":\"SAMPLE_ENV1\"}": {
-                                                        ".": {},
-                                                        "f:name": {},
-                                                        "f:value": {}
-                                                    },
-                                                    "k:{\"name\":\"SAMPLE_ENV2\"}": {
-                                                        ".": {},
-                                                        "f:name": {},
-                                                        "f:value": {}
-                                                    }
-                                                },
-                                                "f:image": {},
-                                                "f:imagePullPolicy": {},
-                                                "f:name": {},
-                                                "f:ports": {
-                                                    ".": {},
-                                                    "k:{\"containerPort\":8000,\"protocol\":\"TCP\"}": {
-                                                        ".": {},
-                                                        "f:containerPort": {},
-                                                        "f:protocol": {}
-                                                    }
-                                                },
-                                                "f:resources": {},
-                                                "f:terminationMessagePath": {},
-                                                "f:terminationMessagePolicy": {}
-                                            }
-                                        },
-                                        "f:dnsPolicy": {},
-                                        "f:restartPolicy": {},
-                                        "f:schedulerName": {},
-                                        "f:securityContext": {},
-                                        "f:terminationGracePeriodSeconds": {}
-                                    }
-                                }
+                        "f:env": {
+                          ".": {
+                            
+                          },
+                          "k:{\"name\":\"SAMPLE_ENV1\"}": {
+                            ".": {
+                              
+                            },
+                            "f:name": {
+                              
+                            },
+                            "f:value": {
+                              
                             }
-                        }
-                    }
-                ]
-            },
-            "spec": {
-                "replicas": 1,
-                "selector": {
-                    "matchLabels": {
-                        "app": "fastapi-app"
-                    }
-                },
-                "template": {
-                    "metadata": {
-                        "creationTimestamp": null,
-                        "labels": {
-                            "app": "fastapi-app"
-                        }
-                    },
-                    "spec": {
-                        "containers": [
-                            {
-                                "name": "fastapi-container",
-                                "image": "smartpixel99/auth:01",
-                                "ports": [
-                                    {
-                                        "containerPort": 8000,
-                                        "protocol": "TCP"
-                                    }
-                                ],
-                                "env": [
-                                    {
-                                        "name": "SAMPLE_ENV1",
-                                        "value": "Hello from Kubernetes"
-                                    },
-                                    {
-                                        "name": "SAMPLE_ENV2",
-                                        "value": "Another Env Variable"
-                                    }
-                                ],
-                                "resources": {},
-                                "terminationMessagePath": "/dev/termination-log",
-                                "terminationMessagePolicy": "File",
-                                "imagePullPolicy": "Always"
+                          },
+                          "k:{\"name\":\"SAMPLE_ENV2\"}": {
+                            ".": {
+                              
+                            },
+                            "f:name": {
+                              
+                            },
+                            "f:value": {
+                              
                             }
-                        ],
-                        "restartPolicy": "Always",
-                        "terminationGracePeriodSeconds": 30,
-                        "dnsPolicy": "ClusterFirst",
-                        "securityContext": {},
-                        "schedulerName": "default-scheduler"
-                    }
-                },
-                "strategy": {
-                    "type": "RollingUpdate",
-                    "rollingUpdate": {
-                        "maxUnavailable": "25%",
-                        "maxSurge": "25%"
-                    }
-                },
-                "revisionHistoryLimit": 10,
-                "progressDeadlineSeconds": 600
-            },
-            "status": {
-                "observedGeneration": 8,
-                "conditions": [
-                    {
-                        "type": "Progressing",
-                        "status": "True",
-                        "lastUpdateTime": "2025-03-22T19:57:36Z",
-                        "lastTransitionTime": "2025-03-22T19:47:07Z",
-                        "reason": "NewReplicaSetAvailable",
-                        "message": "ReplicaSet \"fastapi-app-75f85bc458\" has successfully progressed."
+                          }
+                        },
+                        "f:image": {
+                          
+                        },
+                        "f:imagePullPolicy": {
+                          
+                        },
+                        "f:name": {
+                          
+                        },
+                        "f:ports": {
+                          ".": {
+                            
+                          },
+                          "k:{\"containerPort\":8000,\"protocol\":\"TCP\"}": {
+                            ".": {
+                              
+                            },
+                            "f:containerPort": {
+                              
+                            },
+                            "f:protocol": {
+                              
+                            }
+                          }
+                        },
+                        "f:resources": {
+                          
+                        },
+                        "f:terminationMessagePath": {
+                          
+                        },
+                        "f:terminationMessagePolicy": {
+                          
+                        }
+                      }
                     },
-                    {
-                        "type": "Available",
-                        "status": "True",
-                        "lastUpdateTime": "2025-03-23T14:13:53Z",
-                        "lastTransitionTime": "2025-03-23T14:13:53Z",
-                        "reason": "MinimumReplicasAvailable",
-                        "message": "Deployment has minimum availability."
+                    "f:dnsPolicy": {
+                      
+                    },
+                    "f:restartPolicy": {
+                      
+                    },
+                    "f:schedulerName": {
+                      
+                    },
+                    "f:securityContext": {
+                      
+                    },
+                    "f:terminationGracePeriodSeconds": {
+                      
                     }
-                ]
+                  }
+                }
+              }
             }
-        },
-        "oldObject": {
-            "kind": "Deployment",
+          },
+          {
+            "manager": "kube-controller-manager",
+            "operation": "Update",
             "apiVersion": "apps/v1",
-            "metadata": {
-                "name": "fastapi-app",
-                "namespace": "default",
-                "uid": "cbba6a54-7d49-4e48-ac6c-53bf8515acbc",
-                "resourceVersion": "46637",
-                "generation": 8,
-                "creationTimestamp": "2025-03-22T19:47:07Z",
-                "annotations": {
-                    "deployment.kubernetes.io/revision": "2"
-                },
-                "managedFields": [
-                    {
-                        "manager": "dashboard",
-                        "operation": "Update",
-                        "apiVersion": "apps/v1",
-                        "time": "2025-03-23T13:27:37Z",
-                        "fieldsType": "FieldsV1",
-                        "fieldsV1": {
-                            "f:spec": {
-                                "f:progressDeadlineSeconds": {},
-                                "f:revisionHistoryLimit": {},
-                                "f:selector": {},
-                                "f:strategy": {
-                                    "f:rollingUpdate": {
-                                        ".": {},
-                                        "f:maxSurge": {},
-                                        "f:maxUnavailable": {}
-                                    },
-                                    "f:type": {}
-                                },
-                                "f:template": {
-                                    "f:metadata": {
-                                        "f:labels": {
-                                            ".": {},
-                                            "f:app": {}
-                                        }
-                                    },
-                                    "f:spec": {
-                                        "f:containers": {
-                                            "k:{\"name\":\"fastapi-container\"}": {
-                                                ".": {},
-                                                "f:env": {
-                                                    ".": {},
-                                                    "k:{\"name\":\"SAMPLE_ENV1\"}": {
-                                                        ".": {},
-                                                        "f:name": {},
-                                                        "f:value": {}
-                                                    },
-                                                    "k:{\"name\":\"SAMPLE_ENV2\"}": {
-                                                        ".": {},
-                                                        "f:name": {},
-                                                        "f:value": {}
-                                                    }
-                                                },
-                                                "f:image": {},
-                                                "f:imagePullPolicy": {},
-                                                "f:name": {},
-                                                "f:ports": {
-                                                    ".": {},
-                                                    "k:{\"containerPort\":8000,\"protocol\":\"TCP\"}": {
-                                                        ".": {},
-                                                        "f:containerPort": {},
-                                                        "f:protocol": {}
-                                                    }
-                                                },
-                                                "f:resources": {},
-                                                "f:terminationMessagePath": {},
-                                                "f:terminationMessagePolicy": {}
-                                            }
-                                        },
-                                        "f:dnsPolicy": {},
-                                        "f:restartPolicy": {},
-                                        "f:schedulerName": {},
-                                        "f:securityContext": {},
-                                        "f:terminationGracePeriodSeconds": {}
-                                    }
-                                }
-                            }
-                        }
+            "time": "2025-03-23T14:19:26Z",
+            "fieldsType": "FieldsV1",
+            "fieldsV1": {
+              "f:metadata": {
+                "f:annotations": {
+                  ".": {
+                    
+                  },
+                  "f:deployment.kubernetes.io/revision": {
+                    
+                  }
+                }
+              },
+              "f:status": {
+                "f:conditions": {
+                  ".": {
+                    
+                  },
+                  "k:{\"type\":\"Available\"}": {
+                    ".": {
+                      
                     },
-                    {
-                        "manager": "kube-controller-manager",
-                        "operation": "Update",
-                        "apiVersion": "apps/v1",
-                        "time": "2025-03-23T14:19:26Z",
-                        "fieldsType": "FieldsV1",
-                        "fieldsV1": {
-                            "f:metadata": {
-                                "f:annotations": {
-                                    ".": {},
-                                    "f:deployment.kubernetes.io/revision": {}
-                                }
-                            },
-                            "f:status": {
-                                "f:conditions": {
-                                    ".": {},
-                                    "k:{\"type\":\"Available\"}": {
-                                        ".": {},
-                                        "f:lastTransitionTime": {},
-                                        "f:lastUpdateTime": {},
-                                        "f:message": {},
-                                        "f:reason": {},
-                                        "f:status": {},
-                                        "f:type": {}
-                                    },
-                                    "k:{\"type\":\"Progressing\"}": {
-                                        ".": {},
-                                        "f:lastTransitionTime": {},
-                                        "f:lastUpdateTime": {},
-                                        "f:message": {},
-                                        "f:reason": {},
-                                        "f:status": {},
-                                        "f:type": {}
-                                    }
-                                },
-                                "f:observedGeneration": {}
-                            }
-                        },
-                        "subresource": "status"
+                    "f:lastTransitionTime": {
+                      
+                    },
+                    "f:lastUpdateTime": {
+                      
+                    },
+                    "f:message": {
+                      
+                    },
+                    "f:reason": {
+                      
+                    },
+                    "f:status": {
+                      
+                    },
+                    "f:type": {
+                      
                     }
-                ]
+                  },
+                  "k:{\"type\":\"Progressing\"}": {
+                    ".": {
+                      
+                    },
+                    "f:lastTransitionTime": {
+                      
+                    },
+                    "f:lastUpdateTime": {
+                      
+                    },
+                    "f:message": {
+                      
+                    },
+                    "f:reason": {
+                      
+                    },
+                    "f:status": {
+                      
+                    },
+                    "f:type": {
+                      
+                    }
+                  }
+                },
+                "f:observedGeneration": {
+                  
+                }
+              }
             },
-            "spec": {
-                "replicas": 0,
-                "selector": {
-                    "matchLabels": {
-                        "app": "fastapi-app"
-                    }
-                },
-                "template": {
-                    "metadata": {
-                        "creationTimestamp": null,
-                        "labels": {
-                            "app": "fastapi-app"
-                        }
-                    },
-                    "spec": {
-                        "containers": [
-                            {
-                                "name": "fastapi-container",
-                                "image": "smartpixel99/auth:01",
-                                "ports": [
-                                    {
-                                        "containerPort": 8000,
-                                        "protocol": "TCP"
-                                    }
-                                ],
-                                "env": [
-                                    {
-                                        "name": "SAMPLE_ENV1",
-                                        "value": "Hello from Kubernetes"
-                                    },
-                                    {
-                                        "name": "SAMPLE_ENV2",
-                                        "value": "Another Env Variable"
-                                    }
-                                ],
-                                "resources": {},
-                                "terminationMessagePath": "/dev/termination-log",
-                                "terminationMessagePolicy": "File",
-                                "imagePullPolicy": "Always"
-                            }
-                        ],
-                        "restartPolicy": "Always",
-                        "terminationGracePeriodSeconds": 30,
-                        "dnsPolicy": "ClusterFirst",
-                        "securityContext": {},
-                        "schedulerName": "default-scheduler"
-                    }
-                },
-                "strategy": {
-                    "type": "RollingUpdate",
-                    "rollingUpdate": {
-                        "maxUnavailable": "25%",
-                        "maxSurge": "25%"
-                    }
-                },
-                "revisionHistoryLimit": 10,
-                "progressDeadlineSeconds": 600
-            },
-            "status": {
-                "observedGeneration": 8,
-                "conditions": [
-                    {
-                        "type": "Progressing",
-                        "status": "True",
-                        "lastUpdateTime": "2025-03-22T19:57:36Z",
-                        "lastTransitionTime": "2025-03-22T19:47:07Z",
-                        "reason": "NewReplicaSetAvailable",
-                        "message": "ReplicaSet \"fastapi-app-75f85bc458\" has successfully progressed."
-                    },
-                    {
-                        "type": "Available",
-                        "status": "True",
-                        "lastUpdateTime": "2025-03-23T14:13:53Z",
-                        "lastTransitionTime": "2025-03-23T14:13:53Z",
-                        "reason": "MinimumReplicasAvailable",
-                        "message": "Deployment has minimum availability."
-                    }
-                ]
-            }
+            "subresource": "status"
+          }
+        ]
+      },
+      "spec": {
+        "replicas": 0,
+        "selector": {
+          "matchLabels": {
+            "app": "fastapi-app"
+          }
         },
-        "dryRun": false,
-        "options": {
-            "kind": "UpdateOptions",
-            "apiVersion": "meta.k8s.io/v1"
-        }
+        "template": {
+          "metadata": {
+            "creationTimestamp": null,
+            "labels": {
+              "app": "fastapi-app"
+            }
+          },
+          "spec": {
+            "containers": [
+              {
+                "name": "fastapi-container",
+                "image": "smartpixel99/auth:01",
+                "ports": [
+                  {
+                    "containerPort": 8000,
+                    "protocol": "TCP"
+                  }
+                ],
+                "env": [
+                  {
+                    "name": "SAMPLE_ENV1",
+                    "value": "Hello from Kubernetes"
+                  },
+                  {
+                    "name": "SAMPLE_ENV2",
+                    "value": "Another Env Variable"
+                  }
+                ],
+                "resources": {
+                  
+                },
+                "terminationMessagePath": "/dev/termination-log",
+                "terminationMessagePolicy": "File",
+                "imagePullPolicy": "Always"
+              }
+            ],
+            "restartPolicy": "Always",
+            "terminationGracePeriodSeconds": 30,
+            "dnsPolicy": "ClusterFirst",
+            "securityContext": {
+              
+            },
+            "schedulerName": "default-scheduler"
+          }
+        },
+        "strategy": {
+          "type": "RollingUpdate",
+          "rollingUpdate": {
+            "maxUnavailable": "25%",
+            "maxSurge": "25%"
+          }
+        },
+        "revisionHistoryLimit": 10,
+        "progressDeadlineSeconds": 600
+      },
+      "status": {
+        "observedGeneration": 8,
+        "conditions": [
+          {
+            "type": "Progressing",
+            "status": "True",
+            "lastUpdateTime": "2025-03-22T19:57:36Z",
+            "lastTransitionTime": "2025-03-22T19:47:07Z",
+            "reason": "NewReplicaSetAvailable",
+            "message": "ReplicaSet \"fastapi-app-75f85bc458\" has successfully progressed."
+          },
+          {
+            "type": "Available",
+            "status": "True",
+            "lastUpdateTime": "2025-03-23T14:13:53Z",
+            "lastTransitionTime": "2025-03-23T14:13:53Z",
+            "reason": "MinimumReplicasAvailable",
+            "message": "Deployment has minimum availability."
+          }
+        ]
+      }
+    },
+    "dryRun": false,
+    "options": {
+      "kind": "UpdateOptions",
+      "apiVersion": "meta.k8s.io/v1"
     }
+  }
 }

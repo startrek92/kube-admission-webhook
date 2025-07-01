@@ -1,44 +1,54 @@
 package logger
 
 import (
+	"fmt"
 	"io"
+	"log/slog"
 	"os"
 	"path/filepath"
+	"strings"
 
-	"github.com/sirupsen/logrus"
 	"github.com/startrek92/kube-admission-webhook/config"
-	"gopkg.in/natefinch/lumberjack.v2"
 )
 
-var Log = logrus.New()
+func InitLogger(cfg *config.Config) error {
+	level := parseLevel(cfg.Logging.LogLevel)
 
-func InitLogger(cfg *config.Config) {
-	logDir := cfg.Logging.LogDir
-	logFile := cfg.Logging.LogFile
-
-	if _, err := os.Stat(logDir); os.IsNotExist(err) {
-		_ = os.MkdirAll(logDir, os.ModePerm)
+	logPath := filepath.Join(cfg.Logging.LogDir, cfg.Logging.LogFile)
+	if err := os.MkdirAll(cfg.Logging.LogDir, 0755); err != nil {
+		return fmt.Errorf("failed to create log dir: %w", err)
 	}
 
-	logPath := filepath.Join(logDir, logFile)
-
-	rotator := &lumberjack.Logger{
-		Filename:   logPath,
-		MaxSize:    10,
-		MaxBackups: 5,
-		MaxAge:     30,
-		Compress:   true,
-	}
-
-	Log.SetOutput(io.MultiWriter(os.Stdout, rotator))
-	Log.SetFormatter(&logrus.JSONFormatter{})
-
-	level, err := logrus.ParseLevel(cfg.Logging.LogLevel)
+	logFile, err := os.OpenFile(logPath, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0664)
 	if err != nil {
-		Log.Warnf("Invalid log level in config: %s. Defaulting to info.", cfg.Logging.LogLevel)
-		level = logrus.InfoLevel
+		return fmt.Errorf("failed to open log file: %w", err)
 	}
-	Log.SetLevel(level)
 
-	Log.Debugf("Logger initialized with level: %s", level)
+	env := strings.ToLower(cfg.Server.Env)
+	var handler slog.Handler
+
+	if env == "production" {
+		handler = slog.NewJSONHandler(logFile, &slog.HandlerOptions{Level: level})
+	} else {
+		multi := io.MultiWriter(os.Stdout, logFile)
+		handler = slog.NewJSONHandler(multi, &slog.HandlerOptions{Level: level})
+	}
+
+	slog.SetDefault(slog.New(handler))
+	return nil
+}
+
+func parseLevel(str string) slog.Level {
+	switch strings.ToLower(str) {
+	case "debug":
+		return slog.LevelDebug
+	case "info":
+		return slog.LevelInfo
+	case "warn", "warning":
+		return slog.LevelWarn
+	case "error":
+		return slog.LevelError
+	default:
+		return slog.LevelInfo
+	}
 }
