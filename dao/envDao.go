@@ -6,28 +6,29 @@ import (
 
 	"github.com/sirupsen/logrus"
 	"github.com/startrek92/kube-admission-webhook/db"
+	mongomodels "github.com/startrek92/kube-admission-webhook/mongoModels"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
-func GetWorkloadEnv(collectionName string, workLoadId string) (map[string]interface{}, error) {
+func GetWorkloadEnv(collectionName string, workloadID string) (*mongomodels.WorkloadConfig, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 
 	collection := db.MongoDatabase.Collection(collectionName)
 
-	var result map[string]interface{}
-	err := collection.FindOne(ctx, bson.M{"_id": workLoadId}).Decode(&result)
+	var result mongomodels.WorkloadConfig
+	err := collection.FindOne(ctx, bson.M{"_id": workloadID}).Decode(&result)
 
 	if err != nil {
 		if err == mongo.ErrNoDocuments {
-			logrus.Infof("No document found for workload ID: %s in collection: %s", workLoadId, collectionName)
-			return nil, nil
+			logrus.Infof("No document found for workload ID: %s in collection: %s", workloadID, collectionName)
+			return nil, nil // nil result is valid, just not found
 		}
-		logrus.Errorf("Error fetching workload ID %s from collection %s: %v", workLoadId, collectionName, err)
+		logrus.Errorf("Error fetching workload ID %s from collection %s: %v", workloadID, collectionName, err)
 		return nil, err
 	}
 
-	logrus.Debugf("Fetched workload env: %+v", result)
-	return result, nil
+	logrus.Infof("Fetched typed workload config for '%s': %+v", workloadID, result)
+	return &result, nil
 }

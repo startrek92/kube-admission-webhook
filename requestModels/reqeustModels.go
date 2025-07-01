@@ -1,4 +1,4 @@
-package models
+package requestmodels
 
 type AdmissionReview struct {
 	Request Request `json:"request"`

@@ -40,5 +40,5 @@ func InitLogger(cfg *config.Config) {
 	}
 	Log.SetLevel(level)
 
-	Log.Infof("Logger initialized with level: %s", level)
+	Log.Debugf("Logger initialized with level: %s", level)
 }

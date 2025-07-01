@@ -18,4 +18,5 @@ log_file = "webhook.log"
 log_level = "debug"  # can be "info", "warn", "error", etc.
 
 [workload-collections]
+global = "global"
 dunder_mifflin = "dunder-mifflin"

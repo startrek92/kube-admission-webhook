@@ -30,7 +30,7 @@ func main() {
 		c.JSON(http.StatusOK, gin.H{"message": "pong"})
 	})
 
-	router.POST("/update", controllers.IncomingRequestSchema)
+	router.POST("/update", controllers.IncomingRequestSchema2)
 
 	logger.Log.Infof("Connecting to MongoDB at %s", cfg.BuildMongoURI())
 	db.Connect(cfg.BuildMongoURI())
