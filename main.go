@@ -11,6 +11,7 @@ import (
 	"github.com/startrek92/kube-admission-webhook/controllers"
 	"github.com/startrek92/kube-admission-webhook/db"
 	"github.com/startrek92/kube-admission-webhook/logger"
+	"github.com/startrek92/kube-admission-webhook/middleware"
 )
 
 func main() {
@@ -34,6 +35,9 @@ func main() {
 	})
 
 	router.POST("/update", controllers.IncomingRequestSchema2)
+
+	adminGroup := router.Group("/admin", middleware.AdminAuthMiddleware(*cfg))
+	adminGroup.GET("/config", controllers.AdminGetEnvConfig)
 
 	db.Connect(cfg.BuildMongoURI())
 

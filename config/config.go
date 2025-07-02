@@ -8,6 +8,13 @@ import (
 	"github.com/BurntSushi/toml"
 )
 
+type AuthServerCnf struct {
+	URL            string `toml:"url"`
+	TimeoutSeconds int    `toml:"timeout_seconds"`
+	SkipTLSVerify  bool   `toml:"skip_tls_verify"`
+	VerifyTokenUrl string `toml:"verify_token_url"`
+}
+
 type Config struct {
 	Server struct {
 		Host     string
@@ -31,6 +38,7 @@ type Config struct {
 		DBName   string `toml:"db_name"`
 	}
 
+	AuthServer    AuthServerCnf        `toml:"auth-server"`
 	WorkloadCollections map[string]string `toml:"workload-collections"`
 }
 

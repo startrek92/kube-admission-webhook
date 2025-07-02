@@ -20,3 +20,9 @@ log_level = "debug"  # can be "info", "warn", "error", etc.
 [workload-collections]
 global = "global"
 dunder-mifflin = "dunder-mifflin"
+
+[auth-server]
+url = "https://auth.example.com"
+timeout_seconds = 3
+skip_tls_verify = true
+verify_token_url = "/token"
