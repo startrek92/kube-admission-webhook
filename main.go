@@ -8,10 +8,9 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/startrek92/kube-admission-webhook/config"
-	"github.com/startrek92/kube-admission-webhook/controllers"
 	"github.com/startrek92/kube-admission-webhook/db"
 	"github.com/startrek92/kube-admission-webhook/logger"
-	"github.com/startrek92/kube-admission-webhook/middleware"
+	"github.com/startrek92/kube-admission-webhook/routes"
 )
 
 func main() {
@@ -34,15 +33,14 @@ func main() {
 		c.JSON(http.StatusOK, gin.H{"message": "pong"})
 	})
 
-	router.POST("/update", controllers.IncomingRequestSchema2)
-
-	adminGroup := router.Group("/admin", middleware.AdminAuthMiddleware(*cfg))
-	adminGroup.GET("/config", controllers.AdminGetEnvConfig)
+	routes.AddAdminRoutes(router, cfg)
+	routes.AddK8sRoutes(router)
 
 	db.Connect(cfg.BuildMongoURI())
 
 	log.Info("Running HTTPS server", "address", serverAddr)
-	err := router.RunTLS(serverAddr, cfg.Server.CertFile, cfg.Server.KeyFile)
+	err := router.Run(serverAddr)
+	// err := router.RunTLS(serverAddr, cfg.Server.CertFile, cfg.Server.KeyFile)
 	if err != nil {
 		log.Error("Failed to start HTTPS server", "error", err)
 	}
